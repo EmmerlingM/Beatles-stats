@@ -64,7 +64,7 @@ for x in range(13):
                                        cells=dict(values=[arrays[x][0], arrays[x][1], arrays[x][2]]))
                               ])
 
-plt.pie(arrays[0][1, :], labels=unique[0], startangle=140, autopct='%1.1f%%', explode=([0.1] * len(unique[0])))  # FPPM
+pies[0] = plt.pie(arrays[0][1, :], labels=unique[0], startangle=140, autopct='%1.1f%%', explode=([0.1] * len(unique[0])))  # FPPM
 plt.pie(arrays[1][1, :], labels=unique[1], startangle=140, autopct='%1.1f%%', explode=([0.1] * len(unique[1])))  # FWTB
 plt.pie(arrays[2][1, :], labels=unique[2], startangle=140, autopct='%1.1f%%', explode=([0.1] * len(unique[2])))  # FHDN
 plt.pie(arrays[3][1, :], labels=unique[3], startangle=140, autopct='%1.1f%%', explode=([0.1] * len(unique[3])))  # FBFS
@@ -97,6 +97,23 @@ plt.pie(arrays[11][2, :], labels=unique[11], startangle=140, autopct='%1.1f%%',
         explode=([0.1] * len(unique[11])))  # LLIB
 plt.pie(arrays[12][2, :], labels=unique[12], startangle=140, autopct='%1.1f%%',
         explode=([0.1] * len(unique[12])))  # LAB
+
+def print_lib(libname):
+    name_1 = ['FPPM', 'FWTB', 'FHDN', 'FBFS', 'FH', 'FRS', 'FR', 'FSPL', 'FMMT', 'FWA', 'FYS', 'FLIB', 'FAB']
+    name_2 = ['LPMM', 'LWTB', 'LHDN', 'LBFS', 'LH', 'LRS', 'LR', 'LSPL', 'LMMT', 'LWA', 'LYS', 'LLIB', 'LAB']
+
+    if libname in name_1:
+        i = name_1.index(libname)
+        plt.pie(arrays[i][1,:], labels = unique[i], startangle = 140, autopct = '%1.1f%%', explode = (
+                    [0.1] * len(unique[i])))
+
+    elif libname in name_2:
+        i = name_2.index(libname)
+        plt.pie(arrays[i][2,:], labels = unique[i], startangle = 140, autopct = '%1.1f%%', explode = ([0.1] * len(unique[i])))
+    else:
+        print("Name Error!")
+
+        print_lib("FWA")
 
 #  PPM
 PFPPM = plt.bar(unique[0], liked[0], color="blue", width=0.7)
