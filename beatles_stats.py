@@ -4,7 +4,7 @@ import os
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 
-os.chdir("C:\\Users\\Mateusz\\Documents\\The Beatles\\Beatles table")
+# os.chdir("C:\\Users\\Mateusz\\Documents\\The Beatles\\Beatles table")
 
 rows = []
 fields = []
@@ -73,43 +73,83 @@ for x in range(13):
                                        cells=dict(values=[arrays[x][0], arrays[x][1], arrays[x][2]]))
                               ])
 
+
 def ciastko(libname):
-      name_1 = ['FPPM', 'FWTB', 'FHDN', 'FBFS', 'FH', 'FRS', 'FR', 'FSPL', 'FMMT', 'FWA', 'FYS', 'FLIB', 'FAB']
-      name_2 = ['LPMM', 'LWTB', 'LHDN', 'LBFS', 'LH', 'LRS', 'LR', 'LSPL', 'LMMT', 'LWA', 'LYS', 'LLIB', 'LAB']
+    name_1 = ['FPPM', 'FWTB', 'FHDN', 'FBFS', 'FH', 'FRS', 'FR', 'FSPL', 'FMMT', 'FWA', 'FYS', 'FLIB', 'FAB']
+    name_2 = ['LPMM', 'LWTB', 'LHDN', 'LBFS', 'LH', 'LRS', 'LR', 'LSPL', 'LMMT', 'LWA', 'LYS', 'LLIB', 'LAB']
 
-      if libname in name_1:
-          i = name_1.index(libname)
-          plt.pie(arrays[i][1,:], labels = unique[i], startangle = 140, autopct = '%1.1f%%', explode = (
-                      [0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
+    title_short = libname[1:]
 
-      elif libname in name_2:
-          i = name_2.index(libname)
-          plt.pie(arrays[i][2,:], labels = unique[i], startangle = 140, autopct = '%1.1f%%',
-          explode = ([0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
-      else:
-          print("Name Error!")
+    titles = {
+        'PPM': "Please Please Me",
+        'WTB': "With The Beatles",
+        'HDN': "A Hard Day's Night",
+        'BFS': "Beatles For Sale",
+        'H': "Help!",
+        'RS': "Rubber Soul",
+        'R': "Revolver",
+        'SPL': "Sgt. Pepper's Lonely Hearts Club Band",
+        'MMT': "Magical Mystery Tour",
+        'WA': "The White Album",
+        'YS': "Yellow Submarine",
+        'LIB': "Let It Be",
+        'AB': "Abbey Road",
+    }
 
-ciastko("LLIB") #  You just input a name of the album from object "fields" which you would like to see
+    if libname in name_1:
+        i = name_1.index(libname)
+        plt.pie(arrays[i][1, :], labels=unique[i], startangle=140, autopct='%1.1f%%', explode=(
+                [0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
+        plt.title(titles[title_short])
+
+    elif libname in name_2:
+        i = name_2.index(libname)
+        plt.pie(arrays[i][2, :], labels=unique[i], startangle=140, autopct='%1.1f%%',
+                explode=([0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
+        plt.title(titles[title_short])
+
+    else:
+        print("Name Error!")
+
+ciastko("LWA") #  You just input a name of the album from object "fields" which you would like to see
 
 
 def bary(libname):
-      name_1 = ['PPM', 'WTB', 'HDN', 'BFS', 'H', 'RS', 'R', 'SPL', 'MMT', 'WA', 'YS', 'LIB', 'AB']
+    name_1 = ['PPM', 'WTB', 'HDN', 'BFS', 'H', 'RS', 'R', 'SPL', 'MMT', 'WA', 'YS', 'LIB', 'AB']
+    titles = {
+        'PPM': "Please Please Me",
+        'WTB': "With The Beatles",
+        'HDN': "A Hard Day's Night",
+        'BFS': "Beatles For Sale",
+        'H': "Help!",
+        'RS': "Rubber Soul",
+        'R': "Revolver",
+        'SPL': "Sgt. Pepper's Lonely Hearts Club Band",
+        'MMT': "Magical Mystery Tour",
+        'WA': "The White Album",
+        'YS': "Yellow Submarine",
+        'LIB': "Let It Be",
+        'AB': "Abbey Road",
+    }
+    i = name_1.index(libname)
+    top = max(liked[i])
+    fig, ax = plt.subplots()
+    PF = ax.bar(unique[i], liked[i], color="#11aabb", width=0.7, edgecolor="black")
+    PL = ax.bar(unique[i], disliked[i], bottom=liked[i], width=0.7, edgecolor="black", color="#ff445f")
+    ax.text(s=unique[i][liked[i].index(top)], x=(len(liked[i]) / 2), y=(top / 2), size=50, alpha=0.2,
+          horizontalalignment='center', verticalalignment='center', fontdict=font)
+    ax.legend((PF[0], PL[0]), ('Liked', 'Disliked'), fontsize="xx-large", shadow=True)
+    ax.set_axisbelow(True)
+    ax.grid(b=True, which='both', axis='both', color='black', linewidth=0.7, alpha=0.2)
+    plt.xticks(rotation=20, size=5.5)
+    plt.ylabel("Percentage of votes")
+    plt.xlabel("Titles of the songs")
+    plt.title(titles[libname])
 
-      i = name_1.index(libname)
-      top = max(liked[i])
-      fig, ax = plt.subplots()
-      PF = ax.bar(unique[i], liked[i], color="#11aabb", width=0.7, edgecolor="black")
-      PL = ax.bar(unique[i], disliked[i], bottom=liked[i], width=0.7, edgecolor="black", color="#ff445f")
-      ax.text(s=unique[i][liked[i].index(top)], x=(len(liked[i]) / 2), y=(top / 2), size=50, alpha=0.2,
-              horizontalalignment='center', verticalalignment='center', fontdict=font)
-      ax.legend((PF[0], PL[0]), ('Liked', 'Disliked'), fontsize="xx-large", shadow=True)
-      ax.set_axisbelow(True)
-      ax.grid(b=True, which='both', axis='both', color='black', linewidth=0.7, alpha=0.2)
-      plt.xticks(rotation=20, size=5.5)
-      plt.ylabel("Percentage of votes")
-      plt.xlabel("Titles of the songs")
+
 bary("YS") #  You just input a name of the album from object "fields" which you would like to see
-
+print(albums)
+plt.show()
 # Clearance
 unique.clear()
 lengths.clear()
