@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 
 os.chdir("C:\\Users\\Mateusz\\Documents\\The Beatles\\Beatles table")
+
 rows = []
 fields = []
 filename = 'Beatles.csv'
@@ -29,9 +30,7 @@ rliked = [[]] * 13
 rdisliked = [[]] * 13
 arrays = [[]] * 13
 figs = [[]] * 13
-pies = [[]] * 13
-fl = [[]] * 13
-fd = [[]] * 13
+albums = []
 wp = {'linewidth': 1, 'edgecolor': "black"}
 font = {'family': 'serif',
         'color':  'darkred',
@@ -43,6 +42,10 @@ for x in range(13):
     unique[x] = list(unique[x])
     while ("" in unique[x]):
         unique[x].remove("")
+
+albums = np.unique(beatles[:,28]).tolist()
+while ("" in albums):
+    albums.remove("")
 
 for z in range(13):
     liked[z] = []
@@ -86,7 +89,7 @@ def ciastko(libname):
       else:
           print("Name Error!")
 
-ciastko("FSPL") #  You just input a name of the album from object "fields" which you would like to see
+ciastko("LLIB") #  You just input a name of the album from object "fields" which you would like to see
 
 
 def bary(libname):
@@ -103,7 +106,9 @@ def bary(libname):
       ax.set_axisbelow(True)
       ax.grid(b=True, which='both', axis='both', color='black', linewidth=0.7, alpha=0.2)
       plt.xticks(rotation=20, size=5.5)
-bary("SPL") #  You just input a name of the album from object "fields" which you would like to see
+      plt.ylabel("Percentage of votes")
+      plt.xlabel("Titles of the songs")
+bary("YS") #  You just input a name of the album from object "fields" which you would like to see
 
 # Clearance
 unique.clear()
