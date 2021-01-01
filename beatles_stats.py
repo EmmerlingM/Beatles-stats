@@ -3,6 +3,8 @@ import csv
 import os
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
+from matplotlib import ticker
+from matplotlib.ticker import AutoMinorLocator, FormatStrFormatter
 
 # os.chdir("C:\\Users\\Mateusz\\Documents\\The Beatles\\Beatles table")
 
@@ -102,6 +104,7 @@ def ciastko(libname):
                 [0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
         plt.title(titles[title_short])
 
+
     elif libname in name_2:
         i = name_2.index(libname)
         plt.pie(arrays[i][2, :], labels=unique[i], startangle=140, autopct='%1.1f%%',
@@ -145,7 +148,7 @@ def bary(libname):
     plt.ylabel("Percentage of votes")
     plt.xlabel("Titles of the songs")
     plt.title(titles[libname])
-
+    ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1))
 
 bary("YS") #  You just input a name of the album from object "fields" which you would like to see
 print(albums)
