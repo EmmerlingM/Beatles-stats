@@ -27,11 +27,16 @@ unique = []
 lengths = []
 liked = [[]] * 13
 disliked = [[]] * 13
+likes = [[]] * 13
+dislikes = [[]] * 13
 rliked = [[]] * 13
 rdisliked = [[]] * 13
 arrays = [[]] * 13
 figs = [[]] * 13
-albums = []
+#albums = list()
+alikes = list()
+adislikes = list()
+df = np.array("1")
 wp = {'linewidth': 1, 'edgecolor': "black"}
 font = {'family': 'serif',
         'color':  'darkred',
@@ -50,10 +55,26 @@ for x in range(13):
 
 for z in range(13):
     liked[z] = []
+    likes[z] = []
     disliked[z] = []
+    dislikes[z] = []
     for x in unique[z]:
         liked[z].append((len([elem for elem in beatles[:, y[z]] if elem == x])) / len(beatles))
+        likes[z].append(len([elem for elem in beatles[:, y[z]] if elem == x]))
         disliked[z].append((len([elem for elem in beatles[:, y[z] + 1] if elem == x])) / len(beatles))
+        dislikes[z].append(len([elem for elem in beatles[:, y[z] + 1] if elem == x]))
+
+for x in range(13):
+    for y in range(len(unique[x])):
+        df = np.vstack([df, unique[x][y]])
+df = np.delete(df, (0))
+for x in range(13):
+    for y in range(len(unique[x])):
+        alikes.append(likes[x][y])
+        adislikes.append(dislikes[x][y])
+
+df = np.c_[df, alikes]
+df = np.c_[df, adislikes]
 
 for z in range(13):
     liked[z].insert(len(unique[z]) + 1, 1 - sum(liked[z]))
@@ -153,7 +174,11 @@ bary("LIB") #  You just input a name of the album from object "fields" which you
 unique.clear()
 lengths.clear()
 liked.clear()
+likes.clear()
+alikes.clear()
 disliked.clear()
+dislikes.clear()
+adislikes.clear()
 rliked.clear()
 rdisliked.clear()
 arrays.clear()
