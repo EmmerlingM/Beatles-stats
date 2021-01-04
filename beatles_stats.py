@@ -153,10 +153,21 @@ def bary(libname):
         'AB': "Abbey Road",
     }
     i = name_1.index(libname)
-    top = max(liked[i])
+
+    df = pd.DataFrame({"Liked": liked[i],
+                           "Disliked": disliked[i],
+                           "Unique": unique[i]
+                           })
+
+    df_sorted = df.sort_values('Liked')
+    unique_sorted = df_sorted["Unique"].tolist()
+    disliked_sorted = df_sorted["Disliked"].tolist()
+    liked_sorted = df_sorted["Liked"].tolist()
+
+    top = max(liked_sorted)
     fig, ax = plt.subplots()
-    PF = ax.bar(unique[i], liked[i], color="#11aabb", width=0.7, edgecolor="black")
-    PL = ax.bar(unique[i], disliked[i], bottom=liked[i], width=0.7, edgecolor="black", color="#ff445f", )
+    PF = ax.bar(unique_sorted, liked_sorted, color="#11aabb", width=0.7, edgecolor="black")
+    PL = ax.bar(unique_sorted, disliked_sorted, bottom=liked_sorted, width=0.7, edgecolor="black", color="#ff445f", )
     ax.text(s=unique[i][liked[i].index(top)], x=(len(liked[i]) / 2), y=(top / 2), size=50, alpha=0.2,
             horizontalalignment='center', verticalalignment='center', fontdict=font)
     ax.legend((PF[0], PL[0]), ('Liked', 'Disliked'), fontsize="xx-large", shadow=True)
@@ -167,11 +178,13 @@ def bary(libname):
     plt.xlabel("Titles of the songs", size=15)
     plt.title(titles[libname], titlefont)
     ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1, decimals=0))
-bary("LIB") #  You just input a name of the album from object "fields" which you would like to see
+bary("YS") #  You just input a name of the album from object "fields" which you would like to see
 
-for i in range(189):
-    for a in range(125):
-        songs[i].append(sum(df[i:,0] == keys.iloc[a,0]))
+plt.show()
+
+# for i in range(189):
+#     for a in range(125):
+#         songs[i].append(sum(df[i:,0] == keys.iloc[a,0]))
 
 # Clearance
 unique.clear()
