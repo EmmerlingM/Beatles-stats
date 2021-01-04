@@ -35,7 +35,7 @@ figs = [[]] * 13
 songs = [[]] * 189
 alikes = list()
 adislikes = list()
-df = np.array("1")
+dfb = np.array("1")
 wp = {'linewidth': 1, 'edgecolor': "black"}
 font = {'family': 'serif',
         'color':  'darkred',
@@ -65,15 +65,15 @@ for z in range(13):
 
 for x in range(13):
     for y in range(len(unique[x])):
-        df = np.vstack([df, unique[x][y]])
-df = np.delete(df, (0))
+        dfb = np.vstack([dfb, unique[x][y]])
+dfb = np.delete(dfb, (0))
 for x in range(13):
     for y in range(len(unique[x])):
         alikes.append(likes[x][y])
         adislikes.append(dislikes[x][y])
 
-df = np.c_[df, alikes]
-df = np.c_[df, adislikes]
+dfb = np.c_[dfb, alikes]
+dfb = np.c_[dfb, adislikes]
 
 for z in range(13):
     liked[z].insert(len(unique[z]) + 1, 1 - sum(liked[z]))
@@ -182,9 +182,10 @@ bary("YS") #  You just input a name of the album from object "fields" which you 
 
 plt.show()
 
-# for i in range(189):
-#     for a in range(125):
-#         songs[i].append(sum(df[i:,0] == keys.iloc[a,0]))
+for i in range(189):
+    for a in range(125):
+        if dfb[i, 0] == keys.iloc[a, 0]:
+            songs[i] = True
 
 # Clearance
 unique.clear()
