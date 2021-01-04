@@ -1,126 +1,251 @@
-title,key
-While my guitar gently weeps,C major
-Yesterday,F major
-Come together,F major
-Don't let me down,E major
-Hey jude,F major
-Let it be,C major
-Help!,A major
-Oh! Darling,A major
-Here comes the sun,A major
-Penny Lane,B major
-Twist & shout,D major
-Strawberry fields forever,A# major
-Michelle,G# major
-She loves you,G major
-The long and winding road,D# major
-"Ob-La-Di, Ob-La-Da",A# major
-Eight days a week,D major
-Revolution,B major
-Can't buy me love,C major
-Lucy in the sky with diamonds,G major
-Happiness is a warm gun,C major
-Girl,D# major
-Tomorrow Never Knows,C major
-Please Please Me,E major
-Across the universe,C# major
-Lady Madonna,A major
-Drive my car,D major
-I Should Have Known Better,G major
-Get back,A major
-Back in the U.S.S.R.,A major
-Nowhere man,E major
-Blackbird,G major
-You Never Give Me Your Money,C major
-I am the walrus,A major
-I saw her standing there,E major
-I will,F major
-All you need is love,G major
-In my life,A major
-I'm Only Sleeping,F major
-She's Leaving Home,E major
-Do You Want to Know a Secret?,E major
-A hard day's night,G major
-If I fell,D major
-Golden slumbers,C major
-Rock and Roll Music,A major
-From me to you,C major
-Being for the Benefit of Mr. Kite!,F major
-Within You Without You,C# major
-Mother Nature's son,D major
-Maxwell's Silver Hammer,D major
-I'm Looking Through You,G# major
-I'll Be Back,A major
-We can work it out,D major
-No Reply,C major
-I'll follow the sun,C major
-The fool on the hill,D major
-Your Mother Should Know,C major
-You Can't Do That,G major
-And Your Bird Can Sing,E major
-Sgt. Pepper's Lonely Hearts Club Band (reprise),F major
-You Won't See Me,A major
-Good Day Sunshine,A major
-A day in the life,G major
-Julia,D major
-Blue Jay Way,C major
-Things We Said Today,C major
-When I'm Sixty-Four,C# major
-And I love her,E major
-"Hello, goodbye",C major
-She Said She Said,A# major
-I'm a Loser,G major
-Magical Mystery Tour,D major
-P.S. I Love You,D major
-Money (That's What I Want),E major
-Misery,C major
-A Taste of Honey,A major
-Hold Me Tight,C major
-Chains,A# major
-Baby It's You,G major
-Anna (Go to Him),D major
-Wait,A major
-If I Needed Someone,A major
-Good Morning Good Morning,A major
-Sgt. Pepper's Lonely Hearts Club Band,G major
-I need you,A major
-It Won't Be Long,E major
-The Ballad of John and Yoko,E major
-Devil in Her Heart,G major
-Flying,C major
-Lovely Rita,E major
-Got to Get You Into My Life,G major
-I'll Cry Instead,G major
-Honey Don't,E major
-Every Little Thing,A major
-What Goes On,E major
-Love me do,G major
-With a little help from my friends,E major
-Boys,E major
-Getting better,C major
-I Want to Tell You,A major
-Fixing a Hole,F major
-Run for Your Life,D major
-All I've Got to Do,E major
-The Word,F major
-Don't Pass Me By,C major
-Carry That Weight,C major
-Baby You're a Rich Man,G major
-Piggies,G# major
-Mr. Moonlight,F# major
-Tell me why,D major
-Any Time at All,D major
-Kansas City-Hey-Hey-Hey-Hey!,G major
-Baby's in Black,A major
-I'm Happy Just to Dance With You,E major
-I Don't Want to Spoil the Party,G major
-Think for Yourself,G major
-I Wanna Be Your Man,E major
-What You're Doing,D major
-There's a Place,E major
-Words of Love,A major
-Little Child,E major
-Everybody's Trying to Be My Baby,E major
-Ask Me Why,E major
-When I Get Home,C major
-Love You To,D# major
+title,key
+
+While my guitar gently weeps,C major
+
+Yesterday,F major
+
+Come together,F major
+
+Don't let me down,E major
+
+Hey jude,F major
+
+Let it be,C major
+
+Help!,A major
+
+Oh! Darling,A major
+
+Here comes the sun,A major
+
+Penny Lane,B major
+
+Twist and shout,D major
+
+Strawberry fields forever,A# major
+
+Michelle,G# major
+
+She loves you,G major
+
+The long and winding road,D# major
+
+Ob-La-Di, Ob-La-Da,A# major
+
+Eight days a week,D major
+
+Revolution,B major
+
+Can't buy me love,C major
+
+Lucy in the sky with diamonds,G major
+
+Happiness is a warm gun,C major
+
+Girl,D# major
+
+Tomorrow Never Knows,C major
+
+Please Please Me,E major
+
+Across the universe,C# major
+
+Lady Madonna,A major
+
+Drive my car,D major
+
+I Should Have Known Better,G major
+
+Get back,A major
+
+Back in the U.S.S.R.,A major
+
+Nowhere man,E major
+
+Blackbird,G major
+
+You Never Give Me Your Money,C major
+
+I am the walrus,A major
+
+I saw her standing there,E major
+
+I will,F major
+
+All you need is love,G major
+
+In my life,A major
+
+I'm Only Sleeping,F major
+
+She's Leaving Home,E major
+
+Do You Want to Know a Secret?,E major
+
+A hard day's night,G major
+
+If I fell,D major
+
+Golden slumbers,C major
+
+Rock and Roll Music,A major
+
+From me to you,C major
+
+Being for the Benefit of Mr Kite!,F major
+
+Within You Without You,C# major
+
+Mother Nature's son,D major
+
+Maxwell's Silver Hammer,D major
+
+I'm Looking Through You,G# major
+
+I'll Be Back,A major
+
+We can work it out,D major
+
+No Reply,C major
+
+I'll follow the sun,C major
+
+The fool on the hill,D major
+
+Your Mother Should Know,C major
+
+You Can't Do That,G major
+
+And Your Bird Can Sing,E major
+
+Sgt. Pepper's Lonely Hearts Club Band (reprise),F major
+
+You Won't See Me,A major
+
+Good Day Sunshine,A major
+
+A day in the life,G major
+
+Julia,D major
+
+Blue Jay Way,C major
+
+Things We Said Today,C major
+
+When I'm Sixty-Four,C# major
+
+And I love her,E major
+
+Hello, goodbye,C major
+
+She Said She Said,A# major
+
+I'm a Loser,G major
+
+Magical Mystery Tour,D major
+
+P.S. I Love You,D major
+
+Money (That's What I Want),E major
+
+Misery,C major
+
+A Taste of Honey,A major
+
+Hold Me Tight,C major
+
+Chains,A# major
+
+Baby It's You,G major
+
+Anna (Go to Him),D major
+
+Wait,A major
+
+If I Needed Someone,A major
+
+Good Morning Good Morning,A major
+
+Sgt. Pepper's Lonely Hearts Club Band,G major
+
+I need you,A major
+
+It Won't Be Long,E major
+
+The Ballad of John and Yoko,E major
+
+Devil in Her Heart,G major
+
+Flying,C major
+
+Lovely Rita,E major
+
+Got to Get You Into My Life,G major
+
+I'll Cry Instead,G major
+
+Honey Don't,E major
+
+Every Little Thing,A major
+
+What Goes On,E major
+
+Love me do,G major
+
+With a little help from my friends,E major
+
+Boys,E major
+
+Getting better,C major
+
+I Want to Tell You,A major
+
+Fixing a Hole,F major
+
+Run for Your Life,D major
+
+All I've Got to Do,E major
+
+The Word,F major
+
+Don't Pass Me By,C major
+
+Carry That Weight,C major
+
+Baby You're a Rich Man,G major
+
+Piggies,G# major
+
+Mr Moonlight,F# major
+
+Tell me why,D major
+
+Any Time at All,D major
+
+Kansas City/Hey-Hey-Hey-Hey!,G major
+
+Baby's in Black,A major
+
+I'm Happy Just to Dance With You,E major
+
+I Don't Want to Spoil the Party,G major
+
+Think for Yourself,G major
+
+I Wanna Be Your Man,E major
+
+What You're Doing,D major
+
+There's a Place,E major
+
+Words of Love,A major
+
+Little Child,E major
+
+Everybody's Trying to Be My Baby,E major
+
+Ask Me Why,E major
+
+When I Get Home,C major
+
+Love You To,D# major
