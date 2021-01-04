@@ -1,11 +1,9 @@
 import numpy as np
 import csv
-import os
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 from matplotlib import ticker
-
-os.chdir("C:\\Users\\Mateusz\\Documents\\The Beatles\\Beatles table")
+import pandas as pd
 
 rows = []
 fields = []
@@ -22,6 +20,7 @@ with open(filename, 'r') as csvfile:
         rows.append(row)
 
 beatles = np.array(rows)
+keys = pd.read_csv("songs_data.csv")
 y = list(range(2, 28, 2))
 unique = []
 lengths = []
@@ -33,7 +32,7 @@ rliked = [[]] * 13
 rdisliked = [[]] * 13
 arrays = [[]] * 13
 figs = [[]] * 13
-#albums = list()
+songs = [[]] * 189
 alikes = list()
 adislikes = list()
 df = np.array("1")
@@ -169,6 +168,10 @@ def bary(libname):
     plt.title(titles[libname], titlefont)
     ax.yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1, decimals=0))
 bary("LIB") #  You just input a name of the album from object "fields" which you would like to see
+
+for i in range(189):
+    for a in range(125):
+        songs[i].append(sum(df[i:,0] == keys.iloc[a,0]))
 
 # Clearance
 unique.clear()
