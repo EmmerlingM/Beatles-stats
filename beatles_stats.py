@@ -33,6 +33,7 @@ rdisliked = [[]] * 13
 arrays = [[]] * 13
 figs = [[]] * 13
 songs = [[]] * 189
+lsongs = []
 alikes = list()
 adislikes = list()
 dfb = np.array("1")
@@ -181,11 +182,24 @@ def bary(libname):
 bary("YS") #  You just input a name of the album from object "fields" which you would like to see
 
 plt.show()
-
+x = 0
+dfb[114,0] = "Hello goodbye"
+dfb[139,0] = "Ob-La-Di. Ob-La-Da"
 for i in range(189):
+    dfb[i,0] = str.upper(dfb[i,0])
     for a in range(125):
+        keys.iloc[a,0] = str.upper(keys.iloc[a,0])
         if dfb[i, 0] == keys.iloc[a, 0]:
             songs[i] = True
+            x += 1
+
+index = []
+for i in range(len(songs)):
+    if songs[i] == True:
+        pass
+    else:
+        index.append(i)
+print(x)
 
 # Clearance
 unique.clear()
