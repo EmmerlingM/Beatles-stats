@@ -136,6 +136,9 @@ def ciastko(libname):
 ciastko("LWA") #  You just input a name of the album from object "fields" which you would like to see
 
 
+#test
+rand_int= ()
+
 def bary(libname):
     name_1 = ['PPM', 'WTB', 'HDN', 'BFS', 'H', 'RS', 'R', 'SPL', 'MMT', 'WA', 'YS', 'LIB', 'AB']
     titles = {
@@ -214,3 +217,6 @@ rliked.clear()
 rdisliked.clear()
 arrays.clear()
 figs.clear()
+
+
+#Test
