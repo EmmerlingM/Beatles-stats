@@ -14,37 +14,114 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
 from pandas import DataFrame
 
+#################################### Data Preparation #################################################
+rows = []
+fields = []
+filename = 'Beatles.csv'
+with open(filename, 'r') as csvfile:
+    # creating a csv reader object
+    csvreader = csv.reader(csvfile)
+
+    # extracting field names through first row
+    fields = next(csvreader)
+
+    # extracting each data row one by one
+    for row in csvreader:
+        rows.append(row)
+
+beatles = np.array(rows)
+keys = pd.read_csv("songs_data.csv")
+y = list(range(2, 28, 2))
+unique = []
+lengths = []
+liked = [[]] * 13
+disliked = [[]] * 13
+likes = [[]] * 13
+dislikes = [[]] * 13
+rliked = [[]] * 13
+rdisliked = [[]] * 13
+arrays = [[]] * 13
+figs = [[]] * 13
+songs = [[]] * 189
+lsongs = []
+alikes = list()
+adislikes = list()
+dfb = np.array("1")
+wp = {'linewidth': 1, 'edgecolor': "black"}
+font = {'family': 'serif',
+        'color': 'darkred',
+        'weight': 'normal',
+        'size': 16,
+        }
+titlefont = {'family': 'serif',
+             'color': 'black',
+             'fontweight': 'bold',
+             'size': 20}
+for x in range(13):
+    unique.append(np.unique(beatles[:, y[x]]))
+    unique[x] = list(unique[x])
+    while ("" in unique[x]):
+        unique[x].remove("")
+
+for z in range(13):
+    liked[z] = []
+    likes[z] = []
+    disliked[z] = []
+    dislikes[z] = []
+    for x in unique[z]:
+        liked[z].append((len([elem for elem in beatles[:, y[z]] if elem == x])) / len(beatles))
+        likes[z].append(len([elem for elem in beatles[:, y[z]] if elem == x]))
+        disliked[z].append((len([elem for elem in beatles[:, y[z] + 1] if elem == x])) / len(beatles))
+        dislikes[z].append(len([elem for elem in beatles[:, y[z] + 1] if elem == x]))
+# print(len(beatles))
+
+for x in range(13):
+    for y in range(len(unique[x])):
+        dfb = np.vstack([dfb, unique[x][y]])
+dfb = np.delete(dfb, (0))
+for x in range(13):
+    for y in range(len(unique[x])):
+        alikes.append(likes[x][y])
+        adislikes.append(dislikes[x][y])
+
+dfb = np.c_[dfb, alikes]
+dfb = np.c_[dfb, adislikes]
+
+for z in range(13):
+    liked[z].insert(len(unique[z]) + 1, 1 - sum(liked[z]))
+    disliked[z].insert(len(unique[z]) + 1, 1 - sum(disliked[z]))
+    unique[z].insert(len(unique[z]) + 1, "Abstained")
+
+for x in range(13):
+    rliked[x] = []
+    rdisliked[x] = []
+    lengths.insert(x, len(unique[x]))
+    for y in range(lengths[x]):
+        rliked[x].append(round(liked[x][y], 5))
+        rdisliked[x].append(round(disliked[x][y], 5))
+
+for x in range(13):
+    arrays[x] = np.array([unique[x], rliked[x], rdisliked[x]])
+    figs[x] = go.Figure(data=[go.Table(header=dict(values=['Song names', 'Percentage liked', 'Percentage disliked']),
+                                       cells=dict(values=[arrays[x][0], arrays[x][1], arrays[x][2]]))
+                              ])
+
+
 #################################### Methods #################################################
-
-def pie(s):
-    data1 = {'Country': ['US', 'CA', 'GER', 'UK', 'FR'],
-             'GDP_Per_Capita': [45000, 42000, 52000, 49000, 47000]
-             }
-    df1 = DataFrame(data1, columns=['Country', 'GDP_Per_Capita'])
-
-    figure = plt.Figure(figsize=(6, 5), dpi=100)
-    ax1 = figure.add_subplot(111)
-    bar1 = FigureCanvasTkAgg(figure, gui)
-    bar1.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
-    df1 = df1[['Country', 'GDP_Per_Capita']].groupby('Country').sum()
-    df1.plot(kind='bar', legend=True, ax=ax1)
-    ax1.set_title('Country Vs. GDP Per Capita')
-
 
 def button_logic():
     album = int(album_choice.get())
-    wtich_plot = int(def_choose.get())
+    which_plot = int(def_choose.get())
 
     di = {0: 'AB', 1: 'BFS', 2: 'H', 3: 'HDN', 4: 'LIB', 5: 'MMT', 6: 'PPM', 7: 'R', 8: 'RS', 9: 'SPL', 10: 'WA',
           11: 'WTB', 12: 'YS'}
 
-    if wtich_plot == 1:  # Most Liked
-        ciastko(f"L{di[album]}")
-    elif wtich_plot == 2:  # Most Disliked
+    if which_plot == 1:  # Most Liked
         ciastko(f"F{di[album]}")
+    elif which_plot == 2:  # Most Disliked
+        ciastko(f"L{di[album]}")
     else:  # Barchart
         bar(di[album])
-
 
 def ciastko(libname):
     name_1 = ['FPPM', 'FWTB', 'FHDN', 'FBFS', 'FH', 'FRS', 'FR', 'FSPL', 'FMMT', 'FWA', 'FYS', 'FLIB', 'FAB']
@@ -151,99 +228,6 @@ def bar(s):
 
     tk.mainloop()
 
-
-#################################### Data Prepare #################################################
-rows = []
-fields = []
-filename = 'src/Beatles.csv'
-with open(filename, 'r') as csvfile:
-    # creating a csv reader object
-    csvreader = csv.reader(csvfile)
-
-    # extracting field names through first row
-    fields = next(csvreader)
-
-    # extracting each data row one by one
-    for row in csvreader:
-        rows.append(row)
-
-beatles = np.array(rows)
-keys = pd.read_csv("src/songs_data.csv")
-y = list(range(2, 28, 2))
-unique = []
-lengths = []
-liked = [[]] * 13
-disliked = [[]] * 13
-likes = [[]] * 13
-dislikes = [[]] * 13
-rliked = [[]] * 13
-rdisliked = [[]] * 13
-arrays = [[]] * 13
-figs = [[]] * 13
-songs = [[]] * 189
-lsongs = []
-alikes = list()
-adislikes = list()
-dfb = np.array("1")
-wp = {'linewidth': 1, 'edgecolor': "black"}
-font = {'family': 'serif',
-        'color': 'darkred',
-        'weight': 'normal',
-        'size': 16,
-        }
-titlefont = {'family': 'serif',
-             'color': 'black',
-             'fontweight': 'bold',
-             'size': 20}
-for x in range(13):
-    unique.append(np.unique(beatles[:, y[x]]))
-    unique[x] = list(unique[x])
-    while ("" in unique[x]):
-        unique[x].remove("")
-
-for z in range(13):
-    liked[z] = []
-    likes[z] = []
-    disliked[z] = []
-    dislikes[z] = []
-    for x in unique[z]:
-        liked[z].append((len([elem for elem in beatles[:, y[z]] if elem == x])) / len(beatles))
-        likes[z].append(len([elem for elem in beatles[:, y[z]] if elem == x]))
-        disliked[z].append((len([elem for elem in beatles[:, y[z] + 1] if elem == x])) / len(beatles))
-        dislikes[z].append(len([elem for elem in beatles[:, y[z] + 1] if elem == x]))
-# print(len(beatles))
-
-for x in range(13):
-    for y in range(len(unique[x])):
-        dfb = np.vstack([dfb, unique[x][y]])
-dfb = np.delete(dfb, (0))
-for x in range(13):
-    for y in range(len(unique[x])):
-        alikes.append(likes[x][y])
-        adislikes.append(dislikes[x][y])
-
-dfb = np.c_[dfb, alikes]
-dfb = np.c_[dfb, adislikes]
-
-for z in range(13):
-    liked[z].insert(len(unique[z]) + 1, 1 - sum(liked[z]))
-    disliked[z].insert(len(unique[z]) + 1, 1 - sum(disliked[z]))
-    unique[z].insert(len(unique[z]) + 1, "Abstained")
-
-for x in range(13):
-    rliked[x] = []
-    rdisliked[x] = []
-    lengths.insert(x, len(unique[x]))
-    for y in range(lengths[x]):
-        rliked[x].append(round(liked[x][y], 5))
-        rdisliked[x].append(round(disliked[x][y], 5))
-
-for x in range(13):
-    arrays[x] = np.array([unique[x], rliked[x], rdisliked[x]])
-    figs[x] = go.Figure(data=[go.Table(header=dict(values=['Song names', 'Percentage liked', 'Percentage disliked']),
-                                       cells=dict(values=[arrays[x][0], arrays[x][1], arrays[x][2]]))
-                              ])
-
 #################################### GUI #################################################
 matplotlib.use("TkAgg")
 
@@ -265,7 +249,7 @@ btn = tk.Button(gui, text="Show plot!", width=30, command=button_logic).grid(row
 
 def_choose = tk.StringVar()
 tk.Radiobutton(gui, text="Most Liked", borderwidth=1, width=15, value=1, variable=def_choose).grid(row=0, column=1)
-tk.Radiobutton(gui, text="Most Disiked", borderwidth=1, width=15, value=2, variable=def_choose).grid(row=0, column=2)
+tk.Radiobutton(gui, text="Most Disliked", borderwidth=1, width=15, value=2, variable=def_choose).grid(row=0, column=2)
 tk.Radiobutton(gui, text="Bar Chart", borderwidth=1, width=15, value=3, variable=def_choose).grid(row=0, column=3)
 
 
