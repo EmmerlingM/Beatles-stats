@@ -12,7 +12,6 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 import pandas as pd
-from pandas import DataFrame
 
 #################################### Data Preparation #################################################
 rows = []
@@ -73,7 +72,6 @@ for z in range(13):
         likes[z].append(len([elem for elem in beatles[:, y[z]] if elem == x]))
         disliked[z].append((len([elem for elem in beatles[:, y[z] + 1] if elem == x])) / len(beatles))
         dislikes[z].append(len([elem for elem in beatles[:, y[z] + 1] if elem == x]))
-# print(len(beatles))
 
 for x in range(13):
     for y in range(len(unique[x])):
@@ -125,7 +123,7 @@ def button_logic():
 
 def ciastko(libname):
     name_1 = ['FPPM', 'FWTB', 'FHDN', 'FBFS', 'FH', 'FRS', 'FR', 'FSPL', 'FMMT', 'FWA', 'FYS', 'FLIB', 'FAB']
-    name_2 = ['LPMM', 'LWTB', 'LHDN', 'LBFS', 'LH', 'LRS', 'LR', 'LSPL', 'LMMT', 'LWA', 'LYS', 'LLIB', 'LAB']
+    name_2 = ['LPPM', 'LWTB', 'LHDN', 'LBFS', 'LH', 'LRS', 'LR', 'LSPL', 'LMMT', 'LWA', 'LYS', 'LLIB', 'LAB']
 
     title_short = libname[1:]
 
@@ -150,25 +148,29 @@ def ciastko(libname):
     plot = fig.add_subplot(1, 1, 1)
 
     if libname in name_1:
+
+        fig3, ax3 = plt.subplots()
         i = name_1.index(libname)
-        plt.pie(arrays[i][1, :], labels=unique[i], startangle=140, autopct='%1.1f%%', explode=(
-                [0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
+        ax3.pie(arrays[i][1, :], explode=([0.1] * len(unique[i])), labels=unique[i], autopct='%1.1f%%',
+               shadow="TRUE", startangle=140, wedgeprops=wp)
         plt.title(titles[title_short], titlefont)
 
 
     elif libname in name_2:
-        i = name_2.index(libname)
-        plt.pie(arrays[i][2, :], labels=unique[i], startangle=140, autopct='%1.1f%%',
-                explode=([0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
-        plt.title(titles[title_short], titlefont)
 
+        fig3, ax3 = plt.subplots()
+        i = name_2.index(libname)
+        ax3.pie(arrays[i][2, :], labels=unique[i], startangle=140, autopct='%1.1f%%',
+                        explode=([0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
+        plt.title(titles[title_short], titlefont)
 
     else:
         print("Name Error!")
 
-    canvas = FigureCanvasTkAgg(plt, gui)
+    canvas = FigureCanvasTkAgg(fig3, gui)
     canvas.get_tk_widget().grid(row=2, rowspan=len(titles), columnspan=3, column=1)
     tk.mainloop()
+
 
 
 def bar(s):
