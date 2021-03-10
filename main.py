@@ -14,33 +14,21 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
 from pandas import DataFrame
 
+
 #################################### Methods #################################################
-
-def pie(s):
-    data1 = {'Country': ['US', 'CA', 'GER', 'UK', 'FR'],
-             'GDP_Per_Capita': [45000, 42000, 52000, 49000, 47000]
-             }
-    df1 = DataFrame(data1, columns=['Country', 'GDP_Per_Capita'])
-
-    figure = plt.Figure(figsize=(6, 5), dpi=100)
-    ax1 = figure.add_subplot(111)
-    bar1 = FigureCanvasTkAgg(figure, gui)
-    bar1.get_tk_widget().pack(side=tk.LEFT, fill=tk.BOTH)
-    df1 = df1[['Country', 'GDP_Per_Capita']].groupby('Country').sum()
-    df1.plot(kind='bar', legend=True, ax=ax1)
-    ax1.set_title('Country Vs. GDP Per Capita')
 
 
 def button_logic():
     album = int(album_choice.get())
-    wtich_plot = int(def_choose.get())
+    which_plot = int(def_choose.get())
 
     di = {0: 'AB', 1: 'BFS', 2: 'H', 3: 'HDN', 4: 'LIB', 5: 'MMT', 6: 'PPM', 7: 'R', 8: 'RS', 9: 'SPL', 10: 'WA',
           11: 'WTB', 12: 'YS'}
 
-    if wtich_plot == 1:  # Most Liked
-        ciastko(f"L{di[album]}")
-    elif wtich_plot == 2:  # Most Disliked
+    if which_plot == 1:  # Most Liked
+        c = ciastko(f"L{di[album]}")
+
+    elif which_plot == 2:  # Most Disliked
         ciastko(f"F{di[album]}")
     else:  # Barchart
         bar(di[album])
@@ -48,7 +36,7 @@ def button_logic():
 
 def ciastko(libname):
     name_1 = ['FPPM', 'FWTB', 'FHDN', 'FBFS', 'FH', 'FRS', 'FR', 'FSPL', 'FMMT', 'FWA', 'FYS', 'FLIB', 'FAB']
-    name_2 = ['LPMM', 'LWTB', 'LHDN', 'LBFS', 'LH', 'LRS', 'LR', 'LSPL', 'LMMT', 'LWA', 'LYS', 'LLIB', 'LAB']
+    name_2 = ['LPPM', 'LWTB', 'LHDN', 'LBFS', 'LH', 'LRS', 'LR', 'LSPL', 'LMMT', 'LWA', 'LYS', 'LLIB', 'LAB']
 
     title_short = libname[1:]
 
@@ -68,35 +56,39 @@ def ciastko(libname):
         'AB': "Abbey Road",
     }
 
-    matplotlib.use("TkAgg")
-    fig = Figure(figsize=(5, 4))
-    plot = fig.add_subplot(1, 1, 1)
-
     if libname in name_1:
-        i = name_1.index(libname)
-        plt.pie(arrays[i][1, :], labels=unique[i], startangle=140, autopct='%1.1f%%', explode=(
-                [0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
-        plt.title(titles[title_short], titlefont)
-
+        # fig1, ax1 = plt.subplots()
+        #
+        # i = name_1.index(libname)
+        # ax1.pie(arrays[i][1, :], labels=unique[i], startangle=140, autopct='%1.1f%%', explode=(
+        #         [0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
+        # ax1.title(titles[title_short], titlefont)
+        pass
 
     elif libname in name_2:
-        i = name_2.index(libname)
-        plt.pie(arrays[i][2, :], labels=unique[i], startangle=140, autopct='%1.1f%%',
-                explode=([0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
-        plt.title(titles[title_short], titlefont)
 
+        matplotlib.use("TkAgg")
+        fig3 = Figure(figsize=(6, 5))
+        plot = fig3.add_subplot(1, 1, 1)
+
+        fig3, ax3 = plt.subplots()
+        i = name_2.index(libname)
+        ax3.pie(arrays[i][2, :], labels=unique[i], startangle=140, autopct='%1.1f%%',
+                explode=([0.1] * len(unique[i])), wedgeprops=wp, shadow="TRUE")
+
+        canvas = FigureCanvasTkAgg(fig3, gui)
+        canvas.get_tk_widget().grid(row=2, rowspan=len(titles), columnspan=3, column=1)
+        tk.mainloop()
 
     else:
         print("Name Error!")
 
-    canvas = FigureCanvasTkAgg(plt, gui)
-    canvas.get_tk_widget().grid(row=2, rowspan=len(titles), columnspan=3, column=1)
-    tk.mainloop()
+
 
 
 def bar(s):
     matplotlib.use("TkAgg")
-    fig = Figure(figsize=(5, 4))
+    fig = Figure(figsize=(6, 5))
     plot = fig.add_subplot(1, 1, 1)
 
     libname = s
@@ -265,13 +257,27 @@ btn = tk.Button(gui, text="Show plot!", width=30, command=button_logic).grid(row
 
 def_choose = tk.StringVar()
 tk.Radiobutton(gui, text="Most Liked", borderwidth=1, width=15, value=1, variable=def_choose).grid(row=0, column=1)
-tk.Radiobutton(gui, text="Most Disiked", borderwidth=1, width=15, value=2, variable=def_choose).grid(row=0, column=2)
+tk.Radiobutton(gui, text="Most Disliked", borderwidth=1, width=15, value=2, variable=def_choose).grid(row=0, column=2)
 tk.Radiobutton(gui, text="Bar Chart", borderwidth=1, width=15, value=3, variable=def_choose).grid(row=0, column=3)
 
+# figure = Figure(figsize=(5, 4))
+# plot = figure.add_subplot(1, 1, 1)
+#
+#
+#
+# canvas = FigureCanvasTkAgg(figure, gui)
+# canvas.get_tk_widget().grid(row=2, rowspan=len(titles), columnspan=3, column=1)
 
-figure = Figure(figsize=(5, 4))
-plot = figure.add_subplot(1, 1, 1)
+labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+sizes = [15, 30, 45, 10]
+explode = (0, 0.1, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
 
-canvas = FigureCanvasTkAgg(figure, gui)
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+        shadow=True, startangle=90)
+# ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+canvas = FigureCanvasTkAgg(fig1, gui)
 canvas.get_tk_widget().grid(row=2, rowspan=len(titles), columnspan=3, column=1)
+
 tk.mainloop()
